@@ -1,1 +1,48 @@
+#Algorithm Psuedo Code
 
+==>Writers
+
+wait(mutex);
+writecount++;
+signal(mutex);
+wait(resource);
+
+//performs the write
+
+wait(mutex);
+writecount--;
+signal(mutex);
+signal(resource)
+
+==>Readers
+
+wait(mutex);
+if(writecount>0 || readcount==0)
+	signal(mutex);
+	wait(resource);
+	wait(mutex);
+
+readcount++;
+signal(mutex);
+
+//performs the read
+
+wait(mutex);
+readcount--;
+if(readcount==0)
+	signal(resource);
+signal(mutex);
+
+
+-------------Explanation---------------
+
+Writers: First wait(mutex) is called before writecount so it can avoid incorrectness of writecount. After increasing the writecount it checks if resource is 
+available or not. If available performs writing else waits. After performing writing it checks for mutex that decrement can be done. Finally, it signals mutex
+and resource so that others can use it.
+
+Readers: First read(mutex) is called. And, if allowed to enter checks the condition of writecount>0 or readcount==0. It checks for the resource, if available
+calls wait(mutex) as it getting the required resource. After that readcount is updated and then reading is performed. After the reading process is finished, it 
+is required to decrease the readcount and thus calls wait(mutex). Now it checks if readcount is 0 or not i.e. if some reading action is still going on and if 
+it is 0 then signals that the resource is free and available for others to use. 
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------
