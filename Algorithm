@@ -1,6 +1,6 @@
-#Algorithm Psuedo Code
+//-----------------------------Algorithm Psuedo Code------------------------------//
 
-==>Writers
+//-----Writers--------//
 
 wait(mutex);
 writecount++;
@@ -14,7 +14,7 @@ writecount--;
 signal(mutex);
 signal(resource)
 
-==>Readers
+//-------Readers--------//
 
 wait(mutex);
 if(writecount>0 || readcount==0)
@@ -34,7 +34,7 @@ if(readcount==0)
 signal(mutex);
 
 
--------------Explanation---------------
+//-------------Explanation---------------//
 
 Writers: First wait(mutex) is called before writecount so it can avoid incorrectness of writecount. After increasing the writecount it checks if resource is 
 available or not. If available performs writing else waits. After performing writing it checks for mutex that decrement can be done. Finally, it signals mutex
@@ -45,4 +45,4 @@ calls wait(mutex) as it getting the required resource. After that readcount is u
 is required to decrease the readcount and thus calls wait(mutex). Now it checks if readcount is 0 or not i.e. if some reading action is still going on and if 
 it is 0 then signals that the resource is free and available for others to use. 
 
---------------------------------------------------------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------
